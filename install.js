@@ -1,36 +1,33 @@
 var fs = require('fs');
 var path = require('path');
 var child_process = require('child_process');
-var request = require.resolve('request').replace(/(\/|\\)index.js$/, '');
-var async = require.resolve('async').replace(/(\/|\\)index.js$/, '');
+const http = require('http');
 
-var nuget_path = path.join(__dirname, "..", "nuget.exe");
+var nuget_path = path.join(__dirname, "nuget.exe");
 
-async.waterfall([
-  function(cb) { // Downloads nuget.exe
-    var file = fs.createWriteStream(nuget_path);
-    request.get('http://www.nuget.org/nuget.exe').pipe(file);
-    file.on('finish', function() {
-      cb(null);
-    });
-  },
-  function(cb) { // Updates nuget.exe
-    var nuget = child_process.exec(nuget_path + " update -Self");
-    nuget.stdout.pipe(process.stdout)
-    nuget.on('exit', function() {
-      cb(null);
-    });
-    //child_process.spawn(nuget_path, ["update", "-Self"]);
+var StartInstall = new Promise(function(resolve, reject) {
+  var file = fs.createWriteStream(nuget_path);
+  http.get('http://www.nuget.org/nuget.exe', function(res) {
+    res.pip(file);
+  });
+  file.on('finish', function() {
+    console.log("nuget downloaded.");
+    resolve();
+  });
+});
 
-  },
-  function(cb) { // Restores Packages with nuget.exe
-    var nuget = child_process.exec(nuget_path + " restore -SolutionDirectory ./");
-    nuget.stdout.pipe(process.stdout)
-    nuget.on('exit', function() {
-      cb(null);
-    });
-  }
-], function(err, res) {
-  console.log('nuget Completed!');
-  process.exit(1);
+StartInstall.then(function() {
+  var nuget = child_process.exec(nuget_path + " update -Self");
+  nuget.stdout.pipe(process.stdout)
+  nuget.on('exit', function() {
+    console.log("nuget updating.")
+    return;
+  });
+}).then(function() {
+  var nuget = child_process.exec(nuget_path + " restore -SolutionDirectory ./");
+  nuget.stdout.pipe(process.stdout)
+  nuget.on('exit', function() {
+    console.log('nuget Completed!');
+    return;
+  });
 });
