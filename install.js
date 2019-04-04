@@ -1,8 +1,8 @@
 var fs = require('fs');
 var path = require('path');
 var child_process = require('child_process');
-var request = require('request');
-var async = require('async');
+var request = require.resolve('request').replace(/(\/|\\)index.js$/, '');
+var async = require.resolve('async').replace(/(\/|\\)index.js$/, '');
 
 var nuget_path = path.join(__dirname, "..", "nuget.exe");
 
