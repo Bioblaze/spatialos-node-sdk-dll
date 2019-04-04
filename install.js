@@ -17,14 +17,14 @@ var StartInstall = new Promise(function(resolve, reject) {
 });
 
 StartInstall.then(function() {
-  var nuget = child_process.exec(nuget_path + " update -Self");
+  var nuget = child_process.exec("nuget.exe update -Self");
   nuget.stdout.pipe(process.stdout)
   nuget.on('exit', function() {
     console.log("nuget updating.")
     return;
   });
 }).then(function() {
-  var nuget = child_process.exec(nuget_path + " restore -SolutionDirectory ./");
+  var nuget = child_process.exec("nuget.exe restore -SolutionDirectory ./");
   nuget.stdout.pipe(process.stdout)
   nuget.on('exit', function() {
     console.log('nuget Completed!');
