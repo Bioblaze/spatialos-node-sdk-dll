@@ -6,13 +6,14 @@ const http = require('http');
 var nuget_path = path.join(__dirname, "nuget.exe");
 
 var StartInstall = new Promise(function(resolve, reject) {
-  var file = fs.createWriteStream(nuget_path);
   http.get('http://www.nuget.org/nuget.exe', function(res) {
+    var file = fs.createWriteStream(nuget_path);
     res.pipe(file);
-  });
-  file.on('finish', function() {
-    console.log("nuget downloaded.");
-    resolve();
+    file.on('finish', function() {
+      file.close();
+      console.log("nuget downloaded.");
+      resolve();
+    });
   });
 });
 
