@@ -1,20 +1,12 @@
 {
   "name": "spatialos-node-sdk-dll",
   "version": "1.0.0",
-  "description": "",
+  "description": "This Module was created for the SpatialOS Node.js Module `SpatialOS.js` this module automates the nuget & setup process for this required dependency that is needed for the `Spatial.js` Project to work.",
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "node ./install.js"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "async": "^2.6.2",
-    "request": "^2.88.0"
-  },
-  "devDependencies": {
-    "async": "^2.6.2",
-    "request": "^2.88.0"
-  }
+  "author": "Bioblaze Payne <BioblazePayne@gmail.com>",
+  "license": "MIT"
 }
