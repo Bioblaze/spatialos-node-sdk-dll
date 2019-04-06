@@ -9,5 +9,8 @@
     "postinstall": "node ./compile.js"
   },
   "author": "Bioblaze Payne <BioblazePayne@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "msbuild": "^1.0.3"
+  }
 }

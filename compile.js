@@ -3,12 +3,14 @@ var path = require('path');
 var child_process = require('child_process');
 var csproj = path.join(__dirname, "SpatialDLL", "SpatialDLL.csproj");
 
+var msbuild = require('msbuild');
+
 var StartCompile = new Promise(function(resolve, reject) {
-  var msbuild = child_process.exec(`msbuild ${csproj} /p:Configuration=Release`);
-  msbuild.stdout.pipe(process.stdout);
-  msbuild.on('exit', function() {
+  var build = new msbuild(function() {
     resolve();
   });
+  build.sourcePath = csproj;
+  build.package();
 });
 
 
