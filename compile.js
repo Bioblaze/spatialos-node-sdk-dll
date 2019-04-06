@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var child_process = require('child_process');
 var csproj = path.join(__dirname, "SpatialDLL", "SpatialDLL.csproj");
-
+console.log(require.main.paths);
 var msbuild = require(path.join(require.main.paths[0]," ../..", 'msbuild'));
 
 var StartCompile = new Promise(function(resolve, reject) {
