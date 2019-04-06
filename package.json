@@ -5,8 +5,7 @@
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall": "node ./install.js",
-    "postinstall": "node ./compile.js"
+    "preinstall": "node ./install.js"
   },
   "author": "Bioblaze Payne <BioblazePayne@gmail.com>",
   "license": "MIT",
