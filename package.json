@@ -10,7 +10,7 @@
   },
   "author": "Bioblaze Payne <BioblazePayne@gmail.com>",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "msbuild": "^1.0.3"
   }
 }
