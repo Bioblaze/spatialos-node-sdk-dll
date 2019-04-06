@@ -24,7 +24,7 @@ var csproj = path.join(__dirname, "SpatialDLL", "SpatialDLL.csproj");
 var StartCompile = new Promise(function(resolve, reject) {
   var dotnet = getFromPath('dotnet', 'dotnet.exe');
   console.log(dotnet);
-  var msbuild = child_process.exec(`${dotnet} build ${csproj} --configuration Release`);
+  var msbuild = child_process.exec(`${dotnet} build SpatialDLL/SpatialDLL.csproj`);
   msbuild.stdout.pipe(process.stdout);
   msbuild.on('exit', function() {
     resolve();
